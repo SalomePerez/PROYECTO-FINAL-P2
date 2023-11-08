@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Optional;
 import java.util.function.Predicate;
-
 import static co.edu.uniquindio.poo.util.AssertionUtil.ASSERTION;
 
 public record Equipo(String nombre,Persona representante,Collection<Jugador> jugadores) {
