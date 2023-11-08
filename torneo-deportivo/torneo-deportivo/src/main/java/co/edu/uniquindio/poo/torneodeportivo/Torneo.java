@@ -25,11 +25,12 @@ public class Torneo {
     private final int valorInscripcion;
     private final TipoTorneo tipoTorneo;
     private final Collection<Equipo> equipos;
+    private final TipoGenero tipoGenero;
 
     public Torneo(String nombre, LocalDate fechaInicio,
             LocalDate fechaInicioInscripciones,
             LocalDate fechaCierreInscripciones, byte numeroParticipantes,
-            byte limiteEdad, int valorInscripcion,TipoTorneo tipoTorneo) {
+            byte limiteEdad, int valorInscripcion,TipoTorneo tipoTorneo, TipoGenero tipoGenero) {
         
         ASSERTION.assertion( nombre != null , "El nombre es requerido");
         
@@ -50,6 +51,7 @@ public class Torneo {
         this.valorInscripcion = valorInscripcion;
         this.tipoTorneo = tipoTorneo;
         this.equipos = new LinkedList<>();
+        this.tipoGenero= tipoGenero;
     }
 
     public String getNombre() {
@@ -83,6 +85,11 @@ public class Torneo {
     public TipoTorneo getTipoTorneo() {
         return tipoTorneo;
     }
+    
+    public TipoGenero getTipoGenero() {
+        return tipoGenero;
+    }
+    
 
     public void setFechaInicio(LocalDate fechaInicio) {
         ASSERTION.assertion( fechaInicio != null , "La fecha de inicio es requerida");
@@ -204,4 +211,5 @@ public class Torneo {
         var edadAlInicioTorneo = jugador.calcularEdad(fechaInicio);
         ASSERTION.assertion( limiteEdad == 0 || limiteEdad >= edadAlInicioTorneo , "No se pueden registrar jugadores que excedan el limite de edad del torneo"); 
     }
+
 }
