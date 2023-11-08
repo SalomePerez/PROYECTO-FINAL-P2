@@ -21,8 +21,7 @@ public class JugadorTest {
      * Instancia para el manejo de logs
      */
     private static final Logger LOG = Logger.getLogger(JugadorTest.class.getName());
-    private static final TipoGenero MASCULONO = null;
-    private static final TipoGenero MASCULINO = null;
+
     
     /**
      * Verificar que sea posible registrar un jugador en un equipo 
@@ -56,7 +55,7 @@ public class JugadorTest {
         // Almacenar los datos de prueba Torneo{Copa Mundo\|fechaActual+ 1mes\| fechaActual - 15 días\|fechaActual+15 días\|24\|18\|0\|LOCAL}  Equipo{Uniquindio} Representante{Robinson,Pulgarin,rpulgarin@email.com,6067359300}, Jugador {Christian,Candela,chrcandela@email.com,6067431234, fechaActual - 15 años}
 
         
-        Torneo torneo = new Torneo("Copa Mundo", LocalDate.now().plusMonths(1), LocalDate.now().minusDays(15), LocalDate.now().plusDays(15), (byte)24, (byte)18, 0,TipoTorneo.LOCAL,MASCULINO);
+        Torneo torneo = new Torneo("Copa Mundo", LocalDate.now().plusMonths(1), LocalDate.now().minusDays(15), LocalDate.now().plusDays(15), (byte)24, (byte)18, 0,TipoTorneo.LOCAL,TipoGenero.FEMENINO);
 
         var representante = new Persona("Robinson", "Pulgarin", "rpulgarin@email.com", "6067359300");
         var equipo = new Equipo("Uniquindio", representante);
@@ -81,7 +80,7 @@ public class JugadorTest {
         // Almacenar los datos de prueba Torneo{Copa Mundo\|fechaActual+ 1mes\| fechaActual - 15 días\|fechaActual+15 días\|24\|0\|0\|LOCAL}  Equipo{Uniquindio} Representante{Robinson,Pulgarin,rpulgarin@email.com,6067359300}, Jugador {Christian,Candela,chrcandela@email.com,6067431234, fechaActual - 21 años}
 
         
-        Torneo torneo = new Torneo("Copa Mundo", LocalDate.now().plusMonths(1), LocalDate.now().minusDays(15), LocalDate.now().plusDays(15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL, MASCULINO);
+        Torneo torneo = new Torneo("Copa Mundo", LocalDate.now().plusMonths(1), LocalDate.now().minusDays(15), LocalDate.now().plusDays(15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL,TipoGenero.FEMENINO);
 
         var representante = new Persona("Robinson", "Pulgarin", "rpulgarin@email.com", "6067359300");
         var equipo = new Equipo("Uniquindio", representante);
@@ -108,7 +107,7 @@ public class JugadorTest {
         // Almacenar los datos de prueba Torneo{Copa Mundo\|fechaActual+ 1mes\| fechaActual - 15 días\|fechaActual+15 días\|24\|18\|0\|LOCAL}  Equipo{Uniquindio} Representante{Robinson,Pulgarin,rpulgarin@email.com,6067359300}, Jugador {Christian,Candela,chrcandela@email.com,6067431234, fechaActual - 21 años}
 
         
-        Torneo torneo = new Torneo("Copa Mundo", LocalDate.now().plusMonths(1), LocalDate.now().minusDays(15), LocalDate.now().plusDays(15), (byte)24, (byte)18, 0,TipoTorneo.LOCAL, MASCULONO);
+        Torneo torneo = new Torneo("Copa Mundo", LocalDate.now().plusMonths(1), LocalDate.now().minusDays(15), LocalDate.now().plusDays(15), (byte)24, (byte)18, 0,TipoTorneo.LOCAL, TipoGenero.MASCULINO);
 
         var representante = new Persona("Robinson", "Pulgarin", "rpulgarin@email.com", "6067359300");
         var equipo = new Equipo("Uniquindio", representante);
@@ -133,7 +132,7 @@ public class JugadorTest {
         // Almacenar los datos de prueba Torneo{Copa Mundo\|fechaActual+ 1mes\| fechaActual - 15 días\|fechaActual-1 día\|24\|18\|0\|LOCAL}  Equipo{Uniquindio} Representante{Robinson,Pulgarin,rpulgarin@email.com,6067359300} Jugador {Christian,Candela,chrcandela@email.com,6067431234, fechaActual - 15 años}
 
         
-        Torneo torneo = new Torneo("Copa Mundo", LocalDate.now().plusMonths(1), LocalDate.now().minusDays(15), LocalDate.now().plusDays(1), (byte)24, (byte)18, 0,TipoTorneo.LOCAL,MASCULINO);
+        Torneo torneo = new Torneo("Copa Mundo", LocalDate.now().plusMonths(1), LocalDate.now().minusDays(15), LocalDate.now().plusDays(1), (byte)24, (byte)18, 0,TipoTorneo.LOCAL,TipoGenero.MIXTO);
 
         var representante = new Persona("Robinson", "Pulgarin", "rpulgarin@email.com", "6067359300");
         var equipo = new Equipo("Uniquindio", representante);
@@ -177,7 +176,7 @@ public class JugadorTest {
         LOG.info("Inicio de prueba registrarJugadoresRepetidosTorneo...");
         // Almacenar los datos de prueba Torneo{Copa Mundo\|fechaActual+ 1mes\| fechaActual - 15 días\|fechaActual+15 días\|24\|18\|0\|LOCAL}  Equipo{Uniquindio} Representante{Robinson,Pulgarin,rpulgarin@email.com,6067359300},  Jugador {Christian,Candela,chrcandela@email.com,6067431234, fechaActual - 15 años}, Jugador {Christian,Candela,chrcandela@email.com,6067431234, fechaActual - 15 años}, Equipo{Quindío}
 
-        var torneo = new Torneo("Copa Mundo", LocalDate.now().plusMonths(1), LocalDate.now().minusDays(15), LocalDate.now().plusDays(15), (byte)24, (byte)18, 0,TipoTorneo.LOCAL, MASCULINO);
+        var torneo = new Torneo("Copa Mundo", LocalDate.now().plusMonths(1), LocalDate.now().minusDays(15), LocalDate.now().plusDays(15), (byte)24, (byte)18, 0,TipoTorneo.LOCAL,TipoGenero.MIXTO);
 
         var representante = new Persona("Robinson", "Pulgarin", "rpulgarin@email.com", "6067359300");
         var equipo = new Equipo("Uniquindio", representante);
