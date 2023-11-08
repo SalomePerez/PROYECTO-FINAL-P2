@@ -30,7 +30,7 @@ public class TorneoModificarFechasTest {
     public void modificarFechaInicio() {
         LOG.info("Inicio de prueba modificar fecha de inicio valida...");
         // Almacenar los datos de prueba Copa Mundo|2023-10-01|2023-08-01|2023-09-15|24|0|0|LOCAL
-        Torneo torneo = new Torneo("Copa Mundo", LocalDate.of(2023, 10, 1), LocalDate.of(2023, 8, 1), LocalDate.of(2023, 9, 15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL,TipoGenero.FEMENINO );
+        Torneo torneo = new Torneo("Copa Mundo", LocalDate.of(2023, 10, 1), LocalDate.of(2023, 8, 1), LocalDate.of(2023, 9, 15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL,null, TipoGenero.FEMENINO, null );
 
         // Modificación de la fecha
         torneo.setFechaInicio(LocalDate.of(2023, 10, 12));
@@ -49,7 +49,7 @@ public class TorneoModificarFechasTest {
     public void modificarFechaInicioNull() {
         LOG.info("Inicio de prueba modificar fecha de inicio null...");
         // Almacenar los datos de prueba Copa Mundo|2023-10-01|2023-08-01|2023-09-15|24|0|0|LOCAL
-        Torneo torneo = new Torneo("Copa Mundo", LocalDate.of(2023, 10, 1), LocalDate.of(2023, 8, 1), LocalDate.of(2023, 9, 15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL,TipoGenero.FEMENINO);
+        Torneo torneo = new Torneo("Copa Mundo", LocalDate.of(2023, 10, 1), LocalDate.of(2023, 8, 1), LocalDate.of(2023, 9, 15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL,null, TipoGenero.FEMENINO, null);
 
         // Modificación de la fecha
         assertThrows(Throwable.class,()->torneo.setFechaInicio(null));
@@ -65,7 +65,7 @@ public class TorneoModificarFechasTest {
     public void modificarFechaInicioAnteriorInscripciones() {
         LOG.info("Inicio de prueba modificar fecha de inicio anterior a inscripciones...");
         // Almacenar los datos de prueba Copa Mundo|2023-10-01|2023-08-01|2023-09-15|24|0|0|LOCAL
-        Torneo torneo = new Torneo("Copa Mundo", LocalDate.of(2023, 10, 1), LocalDate.of(2023, 8, 1), LocalDate.of(2023, 9, 15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL,TipoGenero.MASCULINO);
+        Torneo torneo = new Torneo("Copa Mundo", LocalDate.of(2023, 10, 1), LocalDate.of(2023, 8, 1), LocalDate.of(2023, 9, 15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL,null, TipoGenero.MASCULINO, null);
 
         // Modificación de la fecha
         assertThrows(Throwable.class,()->torneo.setFechaInicio(LocalDate.of(2023, 7, 1)));
@@ -81,7 +81,7 @@ public class TorneoModificarFechasTest {
     public void modificarFechaInicioInscripciones() {
         LOG.info("Inicio de prueba modificar fecha de inicio de inscripciones valida...");
         // Almacenar los datos de prueba Copa Mundo|2023-10-01|2023-08-01|2023-09-15|24|0|0|LOCAL
-        Torneo torneo = new Torneo("Copa Mundo", LocalDate.of(2023, 10, 1), LocalDate.of(2023, 8, 1), LocalDate.of(2023, 9, 15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL, MASCULINO);
+        Torneo torneo = new Torneo("Copa Mundo", LocalDate.of(2023, 10, 1), LocalDate.of(2023, 8, 1), LocalDate.of(2023, 9, 15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL, null, MASCULINO, null);
 
         // Modificación de la fecha
         torneo.setFechaInicioInscripciones(LocalDate.of(2023, 8, 10));
@@ -100,7 +100,7 @@ public class TorneoModificarFechasTest {
     public void modificarFechaInicioInscripcionesNull() {
         LOG.info("Inicio de prueba modificar fecha de inicio de inscripciones null...");
         // Almacenar los datos de prueba Copa Mundo|2023-10-01|2023-08-01|2023-09-15|24|0|0|LOCAL
-        Torneo torneo = new Torneo("Copa Mundo", LocalDate.of(2023, 10, 1), LocalDate.of(2023, 8, 1), LocalDate.of(2023, 9, 15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL,TipoGenero.MIXTO);
+        Torneo torneo = new Torneo("Copa Mundo", LocalDate.of(2023, 10, 1), LocalDate.of(2023, 8, 1), LocalDate.of(2023, 9, 15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL,null, TipoGenero.MIXTO, null);
 
         // Modificación de la fecha
         assertThrows(Throwable.class,()->torneo.setFechaInicioInscripciones(null));
