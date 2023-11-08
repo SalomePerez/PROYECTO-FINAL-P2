@@ -8,6 +8,7 @@
 package co.edu.uniquindio.poo.torneodeportivo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -26,16 +27,14 @@ public class Torneo {
     private final TipoTorneo tipoTorneo;
     private final Collection<Equipo> equipos;
     private final TipoGenero tipoGenero;
+    private ArrayList<Juez> listaDeJueces= new ArrayList<>();
 
-    public Torneo(String nombre, LocalDate fechaInicio,
-            LocalDate fechaInicioInscripciones,
-            LocalDate fechaCierreInscripciones, byte numeroParticipantes,
-            byte limiteEdad, int valorInscripcion,TipoTorneo tipoTorneo, TipoGenero tipoGenero) {
-        
+   
+    public Torneo(String nombre, LocalDate fechaInicio, LocalDate fechaInicioInscripciones,
+            LocalDate fechaCierreInscripciones, byte numeroParticipantes, byte limiteEdad, int valorInscripcion,
+            TipoTorneo tipoTorneo, Collection<Equipo> equipos, TipoGenero tipoGenero, ArrayList<Juez> listaDeJueces) {
+
         ASSERTION.assertion( nombre != null , "El nombre es requerido");
-        
-        
-        
         ASSERTION.assertion( numeroParticipantes >= 0, "El número de participantes no puede ser negativo");
         ASSERTION.assertion( limiteEdad >= 0,"El limite de edad no puede ser negativo");
         ASSERTION.assertion( valorInscripcion >= 0,"El valor de la inscripción no puede ser negativo");
@@ -54,6 +53,7 @@ public class Torneo {
         this.tipoGenero= tipoGenero;
     }
 
+    
     public String getNombre() {
         return nombre;
     }
@@ -212,8 +212,14 @@ public class Torneo {
         ASSERTION.assertion( limiteEdad == 0 || limiteEdad >= edadAlInicioTorneo , "No se pueden registrar jugadores que excedan el limite de edad del torneo"); 
     }
 
-    public void validarGenero (){
-        
+
+    public ArrayList<Juez> getListaDeJueces() {
+        return listaDeJueces;
+    }
+
+
+    public void setListaDeJueces(ArrayList<Juez> listaDeJueces) {
+        this.listaDeJueces = listaDeJueces;
     }
 
 }
