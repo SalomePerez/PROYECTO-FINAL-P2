@@ -17,6 +17,7 @@ import java.util.function.Predicate;
 import static co.edu.uniquindio.poo.util.AssertionUtil.ASSERTION;
 
 public class Torneo {
+    public static TipoGenero genero;
     private final String nombre;
     private LocalDate fechaInicio;
     private LocalDate fechaInicioInscripciones;
@@ -116,6 +117,8 @@ public class Torneo {
      * @throws Se genera un error si ya existe un equipo registrado con el mismo nombre, o en caso de que las inscripciones del torneo no esten abiertas.
      */
     public void registrarEquipo(Equipo equipo) {
+
+
         validarEquipoExiste(equipo); 
 
         validarInscripciopnesAbiertas(); 
@@ -146,7 +149,7 @@ public class Torneo {
     public Collection<Equipo> getEquipos() {
         return Collections.unmodifiableCollection(equipos);
     }
-    
+        
     /**
      * Permite buscar un equipo por su nomnbre entre los equipos registrados en el torneo
      * @param nombre Nombre del equipo que se está buscando
@@ -177,7 +180,7 @@ public class Torneo {
      * @param jugador Jugador que se desea registrar.
      */
     public void registrarJugador(Equipo equipo, Jugador jugador) {
-        ASSERTION.assertion( !LocalDate.now().isAfter(fechaCierreInscripciones) , "No se pueden registrar jugadores después del a fecha de cierre de inscripciones");
+        ASSERTION.assertion( !LocalDate.now().isAfter(fechaCierreInscripciones) && (Torneo.genero.equals(jugador.getGenero())), "No se pueden registrar jugadores después del a fecha de cierre de inscripciones");
         validarLimiteEdadJugador(jugador); 
         validarJugadorExiste(jugador);
         equipo.registrarJugador(jugador);
@@ -221,5 +224,7 @@ public class Torneo {
     public void setListaDeJueces(ArrayList<Juez> listaDeJueces) {
         this.listaDeJueces = listaDeJueces;
     }
+
+    //metodo del punto uno que
 
 }
