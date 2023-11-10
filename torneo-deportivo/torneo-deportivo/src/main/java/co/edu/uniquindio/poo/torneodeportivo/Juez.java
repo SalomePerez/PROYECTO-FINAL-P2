@@ -8,7 +8,7 @@ public class Juez extends Persona {
 
     public Juez(String nombre, String apellido, String email, String celular, TipoGenero genero,
             String licenciaDeJuez) {
-        super(nombre, apellido, email, celular, genero);
+        super(nombre, apellido, email, celular);
         this.licenciaDeJuez = licenciaDeJuez;
     }
 

@@ -6,7 +6,7 @@ public class Persona {
     private final String email;
     private final String celular;
      
-    public Persona(String nombre,String apellido,String email, String celular, TipoGenero genero){
+    public Persona(String nombre,String apellido,String email, String celular){
         ASSERTION.assertion( nombre != null && !nombre.isBlank() , "El nombre es requerido");
         ASSERTION.assertion( apellido != null && !apellido.isBlank() , "El apellido es requerido");
         ASSERTION.assertion( celular != null && !celular.isBlank() , "El celular es requerido");
