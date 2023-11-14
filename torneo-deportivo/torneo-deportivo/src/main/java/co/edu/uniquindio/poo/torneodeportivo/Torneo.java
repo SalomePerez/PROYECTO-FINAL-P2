@@ -52,6 +52,7 @@ public class Torneo {
         this.tipoTorneo = tipoTorneo;
         this.equipos = new LinkedList<>();
         this.tipoGenero= tipoGenero;
+        this.listaDeJueces=listaDeJueces;
     }
 
     
