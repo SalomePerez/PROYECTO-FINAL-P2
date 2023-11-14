@@ -184,6 +184,10 @@ public class Torneo {
         ASSERTION.assertion( !LocalDate.now().isAfter(fechaCierreInscripciones) , "No se pueden registrar jugadores después del a fecha de cierre de inscripciones");
        // 
         ASSERTION.assertion(Torneo.genero.equals(jugador.getGenero()),"el genero no es permitido, no concuerda el genro del torneo con el de el jugado");
+        if (getTipoGenero().equals(jugador.getGenero())) {
+            System.out.println("Se agregó correctamente");
+        }
+        
         validarLimiteEdadJugador(jugador); 
         validarJugadorExiste(jugador);
         equipo.registrarJugador(jugador);
