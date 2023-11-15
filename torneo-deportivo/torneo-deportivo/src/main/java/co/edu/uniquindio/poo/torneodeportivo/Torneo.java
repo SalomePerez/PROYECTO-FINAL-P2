@@ -8,7 +8,6 @@
 package co.edu.uniquindio.poo.torneodeportivo;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -27,12 +26,12 @@ public class Torneo {
     private final TipoTorneo tipoTorneo;
     private final Collection<Equipo> equipos;
     private final TipoGenero tipoGenero;
-    private ArrayList<Juez> listaDeJueces= new ArrayList<>();
+    private Collection<Juez> listaDeJueces;
 
    
     public Torneo(String nombre, LocalDate fechaInicio, LocalDate fechaInicioInscripciones,
             LocalDate fechaCierreInscripciones, byte numeroParticipantes, byte limiteEdad, int valorInscripcion,
-            TipoTorneo tipoTorneo, Collection<Equipo> equipos, TipoGenero tipoGenero, ArrayList<Juez> listaDeJueces) {
+            TipoTorneo tipoTorneo, Collection<Equipo> equipos, TipoGenero tipoGenero, Collection<Juez> listaDeJueces) {
 
         ASSERTION.assertion( nombre != null , "El nombre es requerido");
         ASSERTION.assertion( numeroParticipantes >= 0, "El número de participantes no puede ser negativo");
@@ -51,6 +50,7 @@ public class Torneo {
         this.tipoTorneo = tipoTorneo;
         this.equipos = new LinkedList<>();
         this.tipoGenero= tipoGenero;
+        this.listaDeJueces = new LinkedList<>();
     }
 
     
@@ -213,12 +213,12 @@ public class Torneo {
     }
 
 
-    public ArrayList<Juez> getListaDeJueces() {
+    public Collection <Juez> getListaDeJueces() {
         return listaDeJueces;
     }
 
 
-    public void setListaDeJueces(ArrayList<Juez> listaDeJueces) {
+    public void setListaDeJueces(Collection <Juez> listaDeJueces) {
         this.listaDeJueces = listaDeJueces;
     }
 
