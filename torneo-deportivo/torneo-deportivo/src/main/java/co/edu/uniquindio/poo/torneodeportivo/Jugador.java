@@ -13,10 +13,12 @@ import static co.edu.uniquindio.poo.util.AssertionUtil.ASSERTION;
 
 public class Jugador extends Persona {
     private final LocalDate fechaNacimiento;
+    private TipoGenero genero;
 
-    public Jugador(String nombre, String apellido, String email, String celular, LocalDate fechaNacimiento) {
+    public Jugador(String nombre, String apellido, String email, String celular, LocalDate fechaNacimiento, TipoGenero genero) {
         super(nombre, apellido, email, celular);
         ASSERTION.assertion( fechaNacimiento != null , "La fecha de nacimiento es requerida");
+        ASSERTION.assertion(Torneo.genero==genero);
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -32,4 +34,14 @@ public class Jugador extends Persona {
     public byte calcularEdad(LocalDate fecha){
         return (byte) Period.between(fechaNacimiento, fecha).getYears();
     }
+
+    public TipoGenero getGenero() {
+        return genero;
+    }
+
+    public void setGenero(TipoGenero genero) {
+        this.genero = genero;
+    }
+    
+
 }
