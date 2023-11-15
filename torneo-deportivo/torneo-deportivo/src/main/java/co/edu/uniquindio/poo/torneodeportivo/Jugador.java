@@ -18,7 +18,7 @@ public class Jugador extends Persona {
     public Jugador(String nombre, String apellido, String email, String celular, LocalDate fechaNacimiento, TipoGenero genero) {
         super(nombre, apellido, email, celular);
         ASSERTION.assertion( fechaNacimiento != null , "La fecha de nacimiento es requerida");
-        ASSERTION.assertion(Torneo.genero==genero);
+          // ASSERTION.assertion(Torneo.getGenero==genero);
         this.fechaNacimiento = fechaNacimiento;
     }
 

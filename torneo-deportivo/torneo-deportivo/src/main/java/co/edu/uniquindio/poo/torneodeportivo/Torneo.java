@@ -28,10 +28,11 @@ public class Torneo {
     private final Collection<Equipo> equipos;
     private final TipoGeneroTorneo genero;
     private ArrayList<Juez> listaDeJueces = new ArrayList<>();
+    private ArrayList<MatchDay> enfrentamientos = new ArrayList<>();
 
     public Torneo(String nombre, LocalDate fechaInicio, LocalDate fechaInicioInscripciones,
             LocalDate fechaCierreInscripciones, byte numeroParticipantes, byte limiteEdad, int valorInscripcion,
-            TipoTorneo tipoTorneo, Collection<Equipo> equipos, TipoGeneroTorneo genero, ArrayList<Juez> listaDeJueces) {
+            TipoTorneo tipoTorneo, Collection<Equipo> equipos, TipoGeneroTorneo genero, ArrayList<Juez> listaDeJueces, ArrayList<MatchDay> enfrentamientos) {
 
         ASSERTION.assertion(nombre != null, "El nombre es requerido");
         ASSERTION.assertion(numeroParticipantes >= 0, "El número de participantes no puede ser negativo");
@@ -49,6 +50,8 @@ public class Torneo {
         this.tipoTorneo = tipoTorneo;
         this.equipos = new LinkedList<>();
         this.genero = genero;
+        this.listaDeJueces = new ArrayList<>();
+        this.enfrentamientos = new ArrayList<>();
 
     }
 
@@ -198,22 +201,22 @@ public class Torneo {
         switch (genero) {
             case FEMENINO:
                 if (jugador.getGenero().equals(TipoGenero.FEMENINO)) {
-                    // agregarlo
+                    equipo.registrarJugador(jugador);
                 }
                 break;
             case MASCULINO:
                 if (jugador.getGenero().equals(TipoGenero.MASCULINO)) {
-                    // agregarlo
+                    equipo.registrarJugador(jugador);
                 }
                 break;
             default:
-                // agregarlo de una
+                equipo.registrarJugador(jugador);
                 break;
         }
 
         validarLimiteEdadJugador(jugador);
         validarJugadorExiste(jugador);
-        equipo.registrarJugador(jugador);
+        //equipo.registrarJugador(jugador);
     }
 
     /**
@@ -264,6 +267,36 @@ public class Torneo {
         return tipoTorneo;
     }
 
-    // metodo del punto uno que
+    //  Requerimiento # 4
+    //me muestra los enfrentamientos de cada equipo, segun su nombre
 
+    public ArrayList<MatchDay> enfrentamientosEquipo(String nombreEquipo){
+        ArrayList<MatchDay> enfrentEquipo = new ArrayList<>();
+        for(int i = 0;i < enfrentamientos.size();i++){
+            String aux1 = enfrentamientos.get(i).getVisitorTeam().toString();
+            String aux2 = enfrentamientos.get(i).getLocalTeam().toString();
+            if(aux1.equalsIgnoreCase(nombreEquipo) || aux2.equalsIgnoreCase(nombreEquipo)){
+                enfrentEquipo.add(enfrentamientos.get(i));
+            }
+
+        }
+        return enfrentEquipo;
+    }
+
+    //Requerimiento # 5
+    //me muestra los enfrentamientos en los que pitara el juez, segun su licencia
+
+    public ArrayList<MatchDay> enfrentamientosJuez(String licencia){
+        ArrayList<MatchDay> refereeMatches = new ArrayList<>();
+        for(int i = 0 ; i < enfrentamientos.size() ; i++){
+           ArrayList<Juez> refereeAux = enfrentamientos.get(i).getJueces();
+           for(int j = 0; j < refereeAux.size(); j++){
+                if(refereeAux.get(j).getLicenciaDeJuez().equalsIgnoreCase(licencia)){
+                    refereeMatches.add(enfrentamientos.get(i));
+                }
+
+           }
+        }
+        return refereeMatches;
+    }
 }
