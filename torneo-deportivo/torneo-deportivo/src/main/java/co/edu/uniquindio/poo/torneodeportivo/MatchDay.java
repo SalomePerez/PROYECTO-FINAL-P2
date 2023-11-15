@@ -1,7 +1,5 @@
 package co.edu.uniquindio.poo.torneodeportivo;
 
-import static co.edu.uniquindio.poo.util.AssertionUtil.ASSERTION;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 

@@ -26,12 +26,12 @@ public class Torneo {
     private final int valorInscripcion;
     private final TipoTorneo tipoTorneo;
     private final Collection<Equipo> equipos;
-    private final TipoGeneroTorneo genero;
+    private final TipoGenero genero;
     private ArrayList<Juez> listaDeJueces = new ArrayList<>();
 
     public Torneo(String nombre, LocalDate fechaInicio, LocalDate fechaInicioInscripciones,
             LocalDate fechaCierreInscripciones, byte numeroParticipantes, byte limiteEdad, int valorInscripcion,
-            TipoTorneo tipoTorneo, Collection<Equipo> equipos, TipoGeneroTorneo genero, ArrayList<Juez> listaDeJueces) {
+            TipoTorneo tipoTorneo, Collection<Equipo> equipos, TipoGenero genero, ArrayList<Juez> listaDeJueces) {
 
         ASSERTION.assertion(nombre != null, "El nombre es requerido");
         ASSERTION.assertion(numeroParticipantes >= 0, "El número de participantes no puede ser negativo");
@@ -48,7 +48,10 @@ public class Torneo {
         this.valorInscripcion = valorInscripcion;
         this.tipoTorneo = tipoTorneo;
         this.equipos = new LinkedList<>();
-        this.genero = genero;
+        this.genero= genero;
+        this.listaDeJueces=listaDeJueces;
+
+        
 
     }
 
@@ -78,10 +81,6 @@ public class Torneo {
 
     public int getValorInscripcion() {
         return valorInscripcion;
-    }
-
-    public TipoGeneroTorneo getGenero() {
-        return genero;
     }
 
     public void setFechaInicio(LocalDate fechaInicio) {
