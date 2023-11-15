@@ -123,5 +123,7 @@ public class TorneoTest {
         assertThrows(Throwable.class, ()-> new Torneo("Copa Mundo", LocalDate.of(2023, 10, 1), LocalDate.of(2023, 8, 15), LocalDate.of(2023, 8, 1), (byte)24, (byte)0, 0,TipoTorneo.LOCAL, null, TipoGenero.FEMENINO, null));
         
         LOG.info("Fin de prueba Cierre inscripción anterior al inicio...");
+
     }
+    
 }

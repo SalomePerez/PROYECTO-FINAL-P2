@@ -16,6 +16,7 @@ import java.util.function.Predicate;
 import static co.edu.uniquindio.poo.util.AssertionUtil.ASSERTION;
 
 public class Torneo {
+    public static TipoGenero genero;
     private final String nombre;
     private LocalDate fechaInicio;
     private LocalDate fechaInicioInscripciones;
@@ -116,6 +117,8 @@ public class Torneo {
      * @throws Se genera un error si ya existe un equipo registrado con el mismo nombre, o en caso de que las inscripciones del torneo no esten abiertas.
      */
     public void registrarEquipo(Equipo equipo) {
+
+
         validarEquipoExiste(equipo); 
 
         validarInscripciopnesAbiertas(); 
@@ -146,7 +149,7 @@ public class Torneo {
     public Collection<Equipo> getEquipos() {
         return Collections.unmodifiableCollection(equipos);
     }
-    
+        
     /**
      * Permite buscar un equipo por su nomnbre entre los equipos registrados en el torneo
      * @param nombre Nombre del equipo que se está buscando
@@ -178,6 +181,12 @@ public class Torneo {
      */
     public void registrarJugador(Equipo equipo, Jugador jugador) {
         ASSERTION.assertion( !LocalDate.now().isAfter(fechaCierreInscripciones) , "No se pueden registrar jugadores después del a fecha de cierre de inscripciones");
+       // metodo de comparacin q concuerde el genero 
+        ASSERTION.assertion(Torneo.genero.equals(jugador.getGenero()),"el genero no es permitido, no concuerda el genro del torneo con el de el jugado");
+        if (getTipoGenero().equals(jugador.getGenero())) {
+            System.out.println("Se agregó correctamente");
+        }
+        
         validarLimiteEdadJugador(jugador); 
         validarJugadorExiste(jugador);
         equipo.registrarJugador(jugador);
@@ -221,5 +230,7 @@ public class Torneo {
     public void setListaDeJueces(Collection <Juez> listaDeJueces) {
         this.listaDeJueces = listaDeJueces;
     }
+
+    //metodo del punto uno que
 
 }

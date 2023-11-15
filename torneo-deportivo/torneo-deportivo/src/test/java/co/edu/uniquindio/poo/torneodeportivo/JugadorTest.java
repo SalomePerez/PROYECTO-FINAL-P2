@@ -34,7 +34,7 @@ public class JugadorTest {
 
         var representante = new Persona("Robinson", "Pulgarin", "rpulgarin@email.com", "6067359300");
         var equipo = new Equipo("Uniquindio", representante);
-        var jugador = new Jugador("Christian", "Candela", "chrcandela@email.com", "6067431234",LocalDate.now().minusYears(15));
+        var jugador = new Jugador("Christian", "Candela", "chrcandela@email.com", "6067431234",LocalDate.now().minusYears(15),TipoGenero.MASCULINO);
 
         equipo.registrarJugador(jugador);
 
@@ -59,7 +59,7 @@ public class JugadorTest {
 
         var representante = new Persona("Robinson", "Pulgarin", "rpulgarin@email.com", "6067359300");
         var equipo = new Equipo("Uniquindio", representante);
-        var jugador = new Jugador("Christian", "Candela", "chrcandela@email.com", "6067431234",LocalDate.now().minusYears(15));
+        var jugador = new Jugador("Christian", "Candela", "chrcandela@email.com", "6067431234",LocalDate.now().minusYears(15), TipoGenero.MASCULINO);
 
         torneo.registrarEquipo(equipo);
         torneo.registrarJugador("Uniquindio",jugador);
@@ -84,7 +84,7 @@ public class JugadorTest {
 
         var representante = new Persona("Robinson", "Pulgarin", "rpulgarin@email.com", "6067359300");
         var equipo = new Equipo("Uniquindio", representante);
-        var jugador = new Jugador("Christian", "Candela", "chrcandela@email.com", "6067431234",LocalDate.now().minusYears(21));
+        var jugador = new Jugador("Christian", "Candela", "chrcandela@email.com", "6067431234",LocalDate.now().minusYears(21), TipoGenero.MASCULINO);
 
         torneo.registrarEquipo(equipo);
         torneo.registrarJugador("Uniquindio",jugador);
@@ -111,7 +111,7 @@ public class JugadorTest {
 
         var representante = new Persona("Robinson", "Pulgarin", "rpulgarin@email.com", "6067359300");
         var equipo = new Equipo("Uniquindio", representante);
-        var jugador = new Jugador("Christian", "Candela", "chrcandela@email.com", "6067431234",LocalDate.now().minusYears(21));
+        var jugador = new Jugador("Christian", "Candela", "chrcandela@email.com", "6067431234",LocalDate.now().minusYears(21),TipoGenero.MASCULINO);
 
         torneo.registrarEquipo(equipo);
         assertThrows(Throwable.class,()->torneo.registrarJugador("Uniquindio",jugador));
@@ -136,7 +136,7 @@ public class JugadorTest {
 
         var representante = new Persona("Robinson", "Pulgarin", "rpulgarin@email.com", "6067359300");
         var equipo = new Equipo("Uniquindio", representante);
-        var jugador = new Jugador("Christian", "Candela", "chrcandela@email.com", "6067431234",LocalDate.now().minusYears(15));
+        var jugador = new Jugador("Christian", "Candela", "chrcandela@email.com", "6067431234",LocalDate.now().minusYears(15), TipoGenero.MASCULINO);
 
         torneo.registrarEquipo(equipo);
         torneo.setFechaCierreInscripciones(LocalDate.now().minusDays(1));
@@ -157,8 +157,8 @@ public class JugadorTest {
 
         var representante = new Persona("Robinson", "Pulgarin", "rpulgarin@email.com", "6067359300");
         var equipo = new Equipo("Uniquindio", representante);
-        var jugador = new Jugador("Christian", "Candela", "chrcandela@email.com", "6067431234",LocalDate.now().minusYears(15));
-        var jugador2 = new Jugador("Christian", "Candela", "ccandela@email.com", "6067431235",LocalDate.now().minusYears(15));
+        var jugador = new Jugador("Christian", "Candela", "chrcandela@email.com", "6067431234",LocalDate.now().minusYears(15), TipoGenero.MASCULINO);
+        var jugador2 = new Jugador("Christian", "Candela", "ccandela@email.com", "6067431235",LocalDate.now().minusYears(15),TipoGenero.MASCULINO);
         equipo.registrarJugador(jugador);
         assertThrows(Throwable.class,()->equipo.registrarJugador(jugador2));
 
@@ -184,8 +184,8 @@ public class JugadorTest {
         torneo.registrarEquipo(equipo);
         torneo.registrarEquipo(equipo2);
 
-        var jugador = new Jugador("Christian", "Candela", "chrcandela@email.com", "6067431234",LocalDate.now().minusYears(15));
-        var jugador2 = new Jugador("Christian", "Candela", "ccandela@email.com", "6067431235",LocalDate.now().minusYears(15));
+        var jugador = new Jugador("Christian", "Candela", "chrcandela@email.com", "6067431234",LocalDate.now().minusYears(15),TipoGenero.MASCULINO);
+        var jugador2 = new Jugador("Christian", "Candela", "ccandela@email.com", "6067431235",LocalDate.now().minusYears(15),TipoGenero.MASCULINO);
                 
         torneo.registrarJugador("Uniquindio",jugador);
         assertThrows(Throwable.class,()->torneo.registrarJugador("Quindío",jugador2));
