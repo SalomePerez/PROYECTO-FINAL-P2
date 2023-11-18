@@ -107,7 +107,7 @@ public class Torneo {
      * Permite registrar un equipo en el torneo
      * 
      * @param equipo Equipo a ser registrado
-     * @throws Se genera un error si ya existe un equipo registrado con el mismo
+    * @throws Se genera un error si ya existe un equipo registrado con el mismo
      *            nombre, o en caso de que las inscripciones del torneo no esten
      *            abiertas.
      */

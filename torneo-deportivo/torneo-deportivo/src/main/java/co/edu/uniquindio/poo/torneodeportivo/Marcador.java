@@ -1,11 +1,11 @@
 package co.edu.uniquindio.poo.torneodeportivo;
 
-public class Enfrentamiento {
+public class Marcador {
 
     private byte MarcadorEquipo1;
     private byte MarcadorEquipo;
 
-    public Enfrentamiento(byte marcadorEquipo1, byte marcadorEquipo) {
+    public Marcador(byte marcadorEquipo1, byte marcadorEquipo) {
         MarcadorEquipo1 = marcadorEquipo1;
         MarcadorEquipo = marcadorEquipo;
     }
