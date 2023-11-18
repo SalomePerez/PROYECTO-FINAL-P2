@@ -190,10 +190,11 @@ public class Torneo {
     public void registrarJugador(Equipo equipo, Jugador jugador) {
         ASSERTION.assertion(!LocalDate.now().isAfter(fechaCierreInscripciones),
                 "No se pueden registrar jugadores después del a fecha de cierre de inscripciones");
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         // metodo de comparacin q concuerde el genero
         ASSERTION.assertion(genero.equals(jugador.getGenero()),
                 "el genero no es permitido, no concuerda el genero del torneo con el de el jugado");
-
+                //validacion de primer punto de requisitos de proyecto final, validacion vassada en el genro tanto de torneo como de jugadro
         switch (genero) {
             case FEMENINO:
                 if (jugador.getGenero().equals(TipoGenero.FEMENINO)) {
@@ -213,6 +214,7 @@ public class Torneo {
         validarLimiteEdadJugador(jugador);
         validarJugadorExiste(jugador);
         equipo.registrarJugador(jugador);
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     }
 
     /**
