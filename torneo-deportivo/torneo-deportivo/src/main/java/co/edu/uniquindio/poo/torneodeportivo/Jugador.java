@@ -42,6 +42,5 @@ public class Jugador extends Persona {
     public void setGenero(TipoGenero genero) {
         this.genero = genero;
     }
-    
 
 }
