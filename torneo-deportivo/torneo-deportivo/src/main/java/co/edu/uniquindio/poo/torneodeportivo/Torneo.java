@@ -27,13 +27,13 @@ public class Torneo {
     private final TipoTorneo tipoTorneo;
     private final Collection<Participante> participantes;
     private final Collection<Equipo> equipos;
-    private final TipoGenero genero;    
+    private final TipoGeneroTorneo genero;    
     private ArrayList<Juez> listaDeJueces = new ArrayList<>();
     private final CaracterTorneo caracter;
 
     public Torneo(String nombre, LocalDate fechaInicio, LocalDate fechaInicioInscripciones,
             LocalDate fechaCierreInscripciones, byte numeroParticipantes, byte limiteEdad, int valorInscripcion,
-            TipoTorneo tipoTorneo, Collection<Participante> participantes, Collection<Equipo> equipos, TipoGenero genero, ArrayList<Juez> listaDeJueces,CaracterTorneo caracter) {
+            TipoTorneo tipoTorneo, Collection<Participante> participantes, Collection<Equipo> equipos, TipoGeneroTorneo genero, ArrayList<Juez> listaDeJueces,CaracterTorneo caracter) {
 
                 ASSERTION.assertion(nombre != null, "El nombre es requerido");
                 ASSERTION.assertion(numeroParticipantes >= 0, "El número de participantes no puede ser negativo");
@@ -51,13 +51,14 @@ public class Torneo {
         this.valorInscripcion = valorInscripcion;
         this.tipoTorneo = tipoTorneo;
         this.equipos = new LinkedList<>();
-        this.genero= genero;
+        this.genero=genero;
         this.listaDeJueces=listaDeJueces;
         this.caracter= caracter;
 
         
 
     }
+
 
     public String getNombre() {
         return nombre;

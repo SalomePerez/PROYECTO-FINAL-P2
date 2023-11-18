@@ -8,7 +8,7 @@ public enum CaracterTorneo {
     },
     GRUPAL {
         public boolean esValido(Participante participante) {
-            return  participante instanceof Equipo;;
+            return  participante instanceof Jugador;
         }
     };  
 
