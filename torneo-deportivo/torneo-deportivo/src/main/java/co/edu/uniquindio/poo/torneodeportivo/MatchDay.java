@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.torneodeportivo;
 
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -39,16 +40,14 @@ public class MatchDay {
         
     }
 
+    
+
     public LocalDateTime getFechaEnfrentamiento() {
         return fechaEnfrentamiento;
     }
 
     public void setFechaEnfrentamiento(LocalDateTime fechaEnfrentamiento) {
         this.fechaEnfrentamiento = fechaEnfrentamiento;
-    }
-
-    public Juez getJuez() {
-        return juez;
     }
 
     public void setJuez(Juez juez) {
@@ -109,6 +108,12 @@ public class MatchDay {
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
+    }
+
+
+
+    public Juez getJuez() {
+        return juez;
     }    
         
 }
