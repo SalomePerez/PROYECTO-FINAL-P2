@@ -4,11 +4,11 @@ package co.edu.uniquindio.poo.torneodeportivo;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 
 public class MatchDay {
     private LocalDateTime fechaEnfrentamiento;
-    private Juez juez;
     private Lugar lugar;
     private Equipo localTeam;
     private Equipo visitorTeam;
@@ -16,12 +16,13 @@ public class MatchDay {
     private EstadoPartido estadoPartido;
     private LocalTime hora;
     private LocalDate fecha;
+    private ArrayList<Juez> listaDeJueces;
 
     public MatchDay(LocalDateTime fechaEnfrentamiento, Juez juez, Lugar lugar, Equipo localTeam, Equipo visitorTeam, Marcador resultadoEnfrentamiento,
-            EstadoPartido estadoPartido, LocalTime hora, LocalDate fecha) {
+            EstadoPartido estadoPartido, LocalTime hora, LocalDate fecha, ArrayList<Juez> listaDeJueces) {
 
         this.fechaEnfrentamiento = fechaEnfrentamiento;
-        this.juez = juez;
+    
         this.lugar = lugar;
         this.localTeam = localTeam;
         this.visitorTeam = visitorTeam;
@@ -37,10 +38,8 @@ public class MatchDay {
         else{
             this.resultadoEnfrentamiento = null;
         }
-        
+        this.listaDeJueces = new ArrayList<>();
     }
-
-    
 
     public LocalDateTime getFechaEnfrentamiento() {
         return fechaEnfrentamiento;
@@ -48,10 +47,6 @@ public class MatchDay {
 
     public void setFechaEnfrentamiento(LocalDateTime fechaEnfrentamiento) {
         this.fechaEnfrentamiento = fechaEnfrentamiento;
-    }
-
-    public void setJuez(Juez juez) {
-        this.juez = juez;
     }
 
     public Lugar getLugar() {
@@ -110,10 +105,15 @@ public class MatchDay {
         this.fecha = fecha;
     }
 
+    public ArrayList<Juez> getListaDeJueces() {
+        return listaDeJueces;
+    }
 
+    public void setListaDeJueces(ArrayList<Juez> listaDeJueces) {
+        this.listaDeJueces = listaDeJueces;
+    }
 
-    public Juez getJuez() {
-        return juez;
-    }    
-        
+    
+
+    
 }

@@ -33,10 +33,11 @@ public class Torneo {
     private ArrayList<Juez> listaDeJueces = new ArrayList<>();
     private ArrayList<MatchDay> enfrentamientos = new ArrayList<>();
     private CaracterTorneo caracter;
+    private Marcador marcador;
 
     public Torneo(String nombre, LocalDate fechaInicio, LocalDate fechaInicioInscripciones,
             LocalDate fechaCierreInscripciones, byte numeroParticipantes, byte limiteEdad, int valorInscripcion,
-            TipoTorneo tipoTorneo, Collection<Participante> participantes, Collection<Equipo> equipos, TipoGeneroTorneo genero, ArrayList<Juez> listaDeJueces,CaracterTorneo caracter) {
+            TipoTorneo tipoTorneo, Collection<Participante> participantes, Collection<Equipo> equipos, TipoGeneroTorneo genero, ArrayList<Juez> listaDeJueces,CaracterTorneo caracter, Marcador marcador) {
 
 
                 ASSERTION.assertion(nombre != null, "El nombre es requerido");
@@ -55,14 +56,12 @@ public class Torneo {
         this.valorInscripcion = valorInscripcion;
         this.tipoTorneo = tipoTorneo;
         this.equipos = new LinkedList<>();
-
         this.genero = genero;
         this.listaDeJueces = new ArrayList<>();
         this.enfrentamientos = new ArrayList<>();
-
         this.listaDeJueces=listaDeJueces;
         this.caracter=  Objects.requireNonNull(caracter, "El carácter del torneo es requerido");
-;
+        this.marcador=marcador;
 
     }
 
@@ -336,13 +335,13 @@ public class Torneo {
     }
 
 //--------------------------------------------------------------------------------------------------------  
-        // Para registrar los jueces a lista
+        // Para registrar los jueces a lista 2#
         public void registrarJuez(Juez juez) {
             listaDeJueces.add(juez);
         }
 //---------------------------------------------------------------------------------------------------------
 
-    // metodo del punto uno que
+    // requerimiento 4#
     
 
     public ArrayList<MatchDay> enfrentamientosEquipo(String nombreEquipo){
@@ -357,7 +356,7 @@ public class Torneo {
         }
         return enfrentEquipo;
     }
-
+//--------------------------------------------------------------------------------------------------------------
     //Requerimiento # 5 
     //me muestra los enfrentamientos en los que pitara el juez, segun su licencia
     //enfrentamientos.get(i).getJuez();
@@ -365,12 +364,11 @@ public class Torneo {
     public ArrayList<MatchDay> enfrentamientosJuez(String licencia){
         ArrayList<MatchDay> refereeMatches = new ArrayList<>();
         for(int i = 0 ; i < enfrentamientos.size() ; i++){
-           ArrayList<Juez> refereeAux = enfrentamientos.get(i).getJuez();
+           ArrayList<Juez> refereeAux = enfrentamientos.get(i).getListaDeJueces();
            for(int j = 0; j < refereeAux.size(); j++){
                 if(refereeAux.get(j).getLicenciaDeJuez().equalsIgnoreCase(licencia)){
                     refereeMatches.add(enfrentamientos.get(i));
                 }
-
            }
         }
         return refereeMatches;
