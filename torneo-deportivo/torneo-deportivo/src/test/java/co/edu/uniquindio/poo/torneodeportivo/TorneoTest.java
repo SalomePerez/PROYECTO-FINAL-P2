@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,19 @@ public class TorneoTest {
     public void datosCompletos() {
         LOG.info("Inicio de prueba datos completos...");
         // Almacenar los datos de prueba Copa Mundo|2023-10-01|2023-08-01|2023-09-15|24|0|0|LOCAL
-        Torneo torneo = new Torneo("Copa Mundo", LocalDate.of(2023, 10, 1), LocalDate.of(2023, 8, 1), LocalDate.of(2023, 9, 15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL,null, torneo.getEquipos(), TipoGeneroTorneo.FEMENINO, torneo.getListaDeJueces(), null);
+       
+
+        var representante = new Persona("Robinson", "Pulgarin", "rpulgarin@email.com", "6067359300");
+
+        var equipo = new Equipo("Uniquindio", representante);
+
+        Juez jues= new Juez("Samuel", "Castaño", "samuela@", "312982", null, "licencia de juez");
+
+        ArrayList<Juez>listJueces=new ArrayList<>();
+
+        listJueces.add(jues);
+        
+        Torneo torneo = new Torneo("Copa Mundo", LocalDate.of(2023, 10, 1), LocalDate.of(2023, 8, 1), LocalDate.of(2023, 9, 15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL,null,null, TipoGeneroTorneo.FEMENINO, null, null);
 
         // Recuperación y verificación de datos
         assertEquals("Copa Mundo",torneo.getNombre());

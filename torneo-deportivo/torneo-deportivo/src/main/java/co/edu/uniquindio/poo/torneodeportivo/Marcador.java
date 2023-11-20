@@ -25,7 +25,4 @@ public class Marcador {
     public void setMarcadorEquipo(byte marcadorEquipo) {
         MarcadorEquipo = marcadorEquipo;
     }
-    
-    
-    
 }

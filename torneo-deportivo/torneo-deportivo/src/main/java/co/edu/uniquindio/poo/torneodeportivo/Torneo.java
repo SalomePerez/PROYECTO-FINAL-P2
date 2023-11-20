@@ -17,6 +17,7 @@ import java.util.function.Predicate;
 import static co.edu.uniquindio.poo.util.AssertionUtil.ASSERTION;
 
 public class Torneo {
+    
     private final String nombre;
     private LocalDate fechaInicio;
     private LocalDate fechaInicioInscripciones;
@@ -54,9 +55,6 @@ public class Torneo {
         this.genero=genero;
         this.listaDeJueces=listaDeJueces;
         this.caracter= caracter;
-
-        
-
     }
 
 
@@ -316,7 +314,10 @@ public class Torneo {
         boolean existeEquipo = buscarParticipantePorNombre(participante.getNombreCompleto()).isPresent();
         ASSERTION.assertion(!existeEquipo, "El equipo ya esta registrado");
     }
-    // metodo del punto uno que
-    
-
+//--------------------------------------------------------------------------------------------------------  
+        // Para registrar los jueces a lista
+        public void registrarJuez(Juez juez) {
+            listaDeJueces.add(juez);
+        }
+//---------------------------------------------------------------------------------------------------------
 }

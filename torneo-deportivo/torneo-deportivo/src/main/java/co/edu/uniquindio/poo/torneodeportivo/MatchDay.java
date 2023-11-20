@@ -36,6 +36,7 @@ public class MatchDay {
         else{
             this.resultadoEnfrentamiento = null;
         }
+        
     }
 
     public LocalDateTime getFechaEnfrentamiento() {

@@ -45,7 +45,7 @@ public class EquipoTest {
         listJueces.add(jues);
         
         // Almacenar los datos de prueba Torneo{Copa Mundo\|fechaActual+ 1mes\| fechaActual - 15 días\|fechaActual+15 días\|24\|0\|0\|LOCAL}  Equipo{Uniquindio} Representante{Robinson,Pulgarin,rpulgarin@email.com,6067359300}
-        var torneo1= new Torneo("Daniel", LocalDate.now().plusMonths(1), LocalDate.now().minusDays(15), LocalDate.now().plusDays(15), (byte)24, (byte)0, 0, TipoTorneo.LOCAL, equipo, TipoGenero.MASCULINO,listJueces());
+        var torneo1= new Torneo("Daniel", LocalDate.now().plusMonths(1), LocalDate.now().minusDays(15), LocalDate.now().plusDays(15), (byte)24, (byte)0, 0, TipoTorneo.LOCAL, equipo, TipoGenero.MASCULINO, listJueces);
         //Torneo torneo = new Torneo("Copa Mundo", LocalDate.now().plusMonths(1), LocalDate.now().minusDays(15), LocalDate.now().plusDays(15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL, TipoGenero.MASCULINO);
 
         torneo.registrarEquipo(equipo);
