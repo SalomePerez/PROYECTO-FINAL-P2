@@ -25,9 +25,11 @@ public class Torneo {
     private final byte limiteEdad;
     private final int valorInscripcion;
     private final TipoTorneo tipoTorneo;
+    private final Collection<Participante> participantes;
     private final Collection<Equipo> equipos;
-    private final TipoGeneroTorneo genero;
+    private final TipoGeneroTorneo genero;    
     private ArrayList<Juez> listaDeJueces = new ArrayList<>();
+<<<<<<< HEAD
     private ArrayList<MatchDay> enfrentamientos = new ArrayList<>();
 
     public Torneo(String nombre, LocalDate fechaInicio, LocalDate fechaInicioInscripciones,
@@ -40,7 +42,22 @@ public class Torneo {
         ASSERTION.assertion(valorInscripcion >= 0, "El valor de la inscripción no puede ser negativo");
 
         this.nombre = nombre;
+=======
+    private final CaracterTorneo caracter;
 
+    public Torneo(String nombre, LocalDate fechaInicio, LocalDate fechaInicioInscripciones,
+            LocalDate fechaCierreInscripciones, byte numeroParticipantes, byte limiteEdad, int valorInscripcion,
+            TipoTorneo tipoTorneo, Collection<Participante> participantes, Collection<Equipo> equipos, TipoGeneroTorneo genero, ArrayList<Juez> listaDeJueces,CaracterTorneo caracter) {
+>>>>>>> b699863ffce513b97456253008f8b1e34f4caf27
+
+                ASSERTION.assertion(nombre != null, "El nombre es requerido");
+                ASSERTION.assertion(numeroParticipantes >= 0, "El número de participantes no puede ser negativo");
+                ASSERTION.assertion(limiteEdad >= 0, "El limite de edad no puede ser negativo");
+                ASSERTION.assertion(valorInscripcion >= 0, "El valor de la inscripción no puede ser negativo");
+                
+                this.nombre = nombre;
+                this.participantes = new LinkedList<>();
+                
         setFechaInicioInscripciones(fechaInicioInscripciones);
         setFechaCierreInscripciones(fechaCierreInscripciones);
         setFechaInicio(fechaInicio);
@@ -49,11 +66,20 @@ public class Torneo {
         this.valorInscripcion = valorInscripcion;
         this.tipoTorneo = tipoTorneo;
         this.equipos = new LinkedList<>();
+<<<<<<< HEAD
         this.genero = genero;
         this.listaDeJueces = new ArrayList<>();
         this.enfrentamientos = new ArrayList<>();
+=======
+        this.genero=genero;
+        this.listaDeJueces=listaDeJueces;
+        this.caracter= caracter;
+
+        
+>>>>>>> b699863ffce513b97456253008f8b1e34f4caf27
 
     }
+
 
     public String getNombre() {
         return nombre;
@@ -83,10 +109,6 @@ public class Torneo {
         return valorInscripcion;
     }
 
-    public TipoGeneroTorneo getGenero() {
-        return genero;
-    }
-
     public void setFechaInicio(LocalDate fechaInicio) {
         ASSERTION.assertion(fechaInicio != null, "La fecha de inicio es requerida");
         ASSERTION.assertion((fechaInicioInscripciones == null || fechaInicio.isAfter(fechaInicioInscripciones)) &&
@@ -111,7 +133,7 @@ public class Torneo {
      * Permite registrar un equipo en el torneo
      * 
      * @param equipo Equipo a ser registrado
-     * @throws Se genera un error si ya existe un equipo registrado con el mismo
+    * @throws Se genera un error si ya existe un equipo registrado con el mismo
      *            nombre, o en caso de que las inscripciones del torneo no esten
      *            abiertas.
      */
@@ -194,10 +216,11 @@ public class Torneo {
     public void registrarJugador(Equipo equipo, Jugador jugador) {
         ASSERTION.assertion(!LocalDate.now().isAfter(fechaCierreInscripciones),
                 "No se pueden registrar jugadores después del a fecha de cierre de inscripciones");
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         // metodo de comparacin q concuerde el genero
         ASSERTION.assertion(genero.equals(jugador.getGenero()),
                 "el genero no es permitido, no concuerda el genero del torneo con el de el jugado");
-
+                //validacion de primer punto de requisitos de proyecto final, validacion vassada en el genro tanto de torneo como de jugadro
         switch (genero) {
             case FEMENINO:
                 if (jugador.getGenero().equals(TipoGenero.FEMENINO)) {
@@ -216,7 +239,12 @@ public class Torneo {
 
         validarLimiteEdadJugador(jugador);
         validarJugadorExiste(jugador);
+<<<<<<< HEAD
         //equipo.registrarJugador(jugador);
+=======
+        equipo.registrarJugador(jugador);
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>>>>> b699863ffce513b97456253008f8b1e34f4caf27
     }
 
     /**
@@ -267,8 +295,59 @@ public class Torneo {
         return tipoTorneo;
     }
 
+<<<<<<< HEAD
     //  Requerimiento # 4
     //me muestra los enfrentamientos de cada equipo, segun su nombre
+=======
+    /**
+     * Permite registrar un participante en el torneo
+     * 
+     * @param participante Participante a ser registrado
+     * @throws Se genera un error si ya existe un equipo registrado con el mismo
+     *            nombre, o en caso de que las inscripciones del torneo no estén
+     *            abiertas.
+     */
+    public void registrarParticipante(Participante participante) {
+        validarParticipanteExiste(participante);
+
+        validarInscripciopnesAbiertas();
+        validarCaracter(participante);
+
+        participantes.add(participante);
+    }
+    /**
+     * Valida que el participante sea acorde con el carácter del torneo.
+     * 
+     * @param participante Participante a ser registrado
+     */
+    private void validarCaracter(Participante participante) {
+        ASSERTION.assertion(caracter.esValido(participante), "Las inscripciones no están abiertas");
+    }
+
+    /**
+     * Permite buscar un participante por su nombre entre los participantes
+     * registrados en el torneo
+     * 
+     * @param nombre Nombre del participante que se está buscando
+     * @return Un Optional<Participante> con el participante cuyo nombre sea igual
+     *         al nombre buscado, o un Optional vacío en caso de no encontrar un
+     *         participante con nombre igual al dado.
+     */
+    public Optional<Participante> buscarParticipantePorNombre(String nombre) {
+        Predicate<Participante> condicion = participante -> participante.getNombreCompleto().equals(nombre);
+        return participantes.stream().filter(condicion).findAny();
+    }
+       /**
+     * Valida que no exista ya un equipo registrado con el mismo nombre, en caso de
+     * haberlo genera un assertion error.
+     */
+    private void validarParticipanteExiste(Participante participante) {
+        boolean existeEquipo = buscarParticipantePorNombre(participante.getNombreCompleto()).isPresent();
+        ASSERTION.assertion(!existeEquipo, "El equipo ya esta registrado");
+    }
+    // metodo del punto uno que
+    
+>>>>>>> b699863ffce513b97456253008f8b1e34f4caf27
 
     public ArrayList<MatchDay> enfrentamientosEquipo(String nombreEquipo){
         ArrayList<MatchDay> enfrentEquipo = new ArrayList<>();
