@@ -211,23 +211,25 @@ public class Torneo {
             case FEMENINO:
                 if (jugador.getGenero().equals(TipoGenero.FEMENINO)) {
                     equipo.registrarJugador(jugador);
+                    validarLimiteEdadJugador(jugador);
+                    equipo.registrarJugador(jugador);
                 }
                 break;
             case MASCULINO:
                 if (jugador.getGenero().equals(TipoGenero.MASCULINO)) {
                      validarEquipoExiste(equipo);
-                     
+                     validarLimiteEdadJugador(jugador);
                     equipo.registrarJugador(jugador);
                 }
                 break;
             default:
                 equipo.registrarJugador(jugador);
+                validarLimiteEdadJugador(jugador);
+                equipo.registrarJugador(jugador);
                 break;
         }
-        validarEquipoExiste(equipo);
-        validarLimiteEdadJugador(jugador);
          
-        //equipo.registrarJugador(jugador);
+
 }
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
@@ -356,8 +358,9 @@ public class Torneo {
         return enfrentEquipo;
     }
 
-    //Requerimiento # 5
+    //Requerimiento # 5 
     //me muestra los enfrentamientos en los que pitara el juez, segun su licencia
+    //enfrentamientos.get(i).getJuez();
 
     public ArrayList<MatchDay> enfrentamientosJuez(String licencia){
         ArrayList<MatchDay> refereeMatches = new ArrayList<>();
