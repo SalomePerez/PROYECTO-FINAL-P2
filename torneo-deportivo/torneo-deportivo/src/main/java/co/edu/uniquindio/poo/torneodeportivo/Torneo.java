@@ -68,7 +68,8 @@ public class Torneo {
         this.marcador=marcador;
 
     }
-   // metodos de acceso
+   
+    // metodos de acceso
     public String getNombre() {
         return nombre;
     }
