@@ -1,24 +1,29 @@
-/**
- * Clase que agrupa los datos de un Torneo
- * @author Área de programación UQ
- * @since 2023-08
- * 
- * Licencia GNU/GPL V3.0 (https://raw.githubusercontent.com/grid-uq/poo/main/LICENSE) 
- */
-package co.edu.uniquindio.poo.torneodeportivo;
 
+package co.edu.uniquindio.poo.torneodeportivo;
+/**
+ * registro que agrupa los datos de un equipo
+ *@author: Samuel Castaño
+ *@author: Daniel Jurado
+ *@author: Salomé Pérez
+ *@since : 22-11-2023
+ * licencia GNU/GLP V3.0 (https://github.com/SalomePerez/PROYECTO-FINAL-P2.git)
+ * esta clase llamada torneo tiene gran parte de los metodos de validaciones y registro y contiene 2 requisitos del proyecto final
+ */
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import static co.edu.uniquindio.poo.util.AssertionUtil.ASSERTION;
 
 public class Torneo {
-
+    //atributos
     private final String nombre;
     private LocalDate fechaInicio;
     private LocalDate fechaInicioInscripciones;
@@ -34,20 +39,19 @@ public class Torneo {
     private ArrayList<MatchDay> enfrentamientos = new ArrayList<>();
     private CaracterTorneo caracter;
     private Marcador marcador;
-
+    //constuctor
     public Torneo(String nombre, LocalDate fechaInicio, LocalDate fechaInicioInscripciones,
             LocalDate fechaCierreInscripciones, byte numeroParticipantes, byte limiteEdad, int valorInscripcion,
             TipoTorneo tipoTorneo, Collection<Participante> participantes, Collection<Equipo> equipos, TipoGeneroTorneo genero, ArrayList<Juez> listaDeJueces,CaracterTorneo caracter, Marcador marcador) {
 
-
-                ASSERTION.assertion(nombre != null, "El nombre es requerido");
-                ASSERTION.assertion(numeroParticipantes >= 0, "El número de participantes no puede ser negativo");
-                ASSERTION.assertion(limiteEdad >= 0, "El limite de edad no puede ser negativo");
-                ASSERTION.assertion(valorInscripcion >= 0, "El valor de la inscripción no puede ser negativo");
-                
-                this.nombre = nombre;
-                this.participantes = new LinkedList<>();
-                
+            // assertion de los atributos propios de esta clase que exige que no sean null
+            ASSERTION.assertion(nombre != null && !nombre.isBlank(), "El nombre es requerido");
+            ASSERTION.assertion(numeroParticipantes >= 0 , "El número de participantes no puede ser negativo");
+            ASSERTION.assertion(limiteEdad >= 0, "El limite de edad no puede ser negativo");
+            ASSERTION.assertion(valorInscripcion >= 0, "El valor de la inscripción no puede ser negativo");
+             
+        this.nombre = nombre;
+        this.participantes = new LinkedList<>();       
         setFechaInicioInscripciones(fechaInicioInscripciones);
         setFechaCierreInscripciones(fechaCierreInscripciones);
         setFechaInicio(fechaInicio);
@@ -64,8 +68,7 @@ public class Torneo {
         this.marcador=marcador;
 
     }
-
-
+   // metodos de acceso
     public String getNombre() {
         return nombre;
     }
@@ -94,6 +97,46 @@ public class Torneo {
         return valorInscripcion;
     }
 
+    public ArrayList<Juez> getListaDeJueces() {
+        return listaDeJueces;
+    }
+    
+    public void setListaDeJueces(ArrayList<Juez> listaDeJueces) {
+        this.listaDeJueces = listaDeJueces;
+    }
+    
+    public TipoTorneo getTipoTorneo() {
+        return tipoTorneo;
+    }
+
+public Collection<Participante> getParticipantes() {
+        return participantes;
+    }
+    public TipoGeneroTorneo getGenero() {
+        return genero;
+    }
+    public ArrayList<MatchDay> getEnfrentamientos() {
+        return enfrentamientos;
+    }
+    public void setEnfrentamientos(ArrayList<MatchDay> enfrentamientos) {
+        this.enfrentamientos = enfrentamientos;
+    }
+    public CaracterTorneo getCaracter() {
+        return caracter;
+    }
+    public void setCaracter(CaracterTorneo caracter) {
+        this.caracter = caracter;
+    }
+    public Marcador getMarcador() {
+        return marcador;
+    }
+    public void setMarcador(Marcador marcador) {
+        this.marcador = marcador;
+    }
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    /**metodo que valida la fecha de inicio utilizando los assertion
+     * @param fechaInicio 
+     */
     public void setFechaInicio(LocalDate fechaInicio) {
         ASSERTION.assertion(fechaInicio != null, "La fecha de inicio es requerida");
         ASSERTION.assertion((fechaInicioInscripciones == null || fechaInicio.isAfter(fechaInicioInscripciones)) &&
@@ -101,12 +144,16 @@ public class Torneo {
                 "La fecha de inicio no es válida");
         this.fechaInicio = fechaInicio;
     }
-
+    /** metodo que valida la fecha de inicio de inscripciones utilizando los assertion
+     * @param fechaInicioInscripciones
+     */
     public void setFechaInicioInscripciones(LocalDate fechaInicioInscripciones) {
         ASSERTION.assertion(fechaInicioInscripciones != null, "La fecha de inicio de inscripciones es requerida");
         this.fechaInicioInscripciones = fechaInicioInscripciones;
     }
-
+    /** metodo que valida la fecha de cierre de inscripciones utilizando los assertion 
+     * @param fechaCierreInscripciones
+     */
     public void setFechaCierreInscripciones(LocalDate fechaCierreInscripciones) {
         ASSERTION.assertion(fechaCierreInscripciones != null, "La fecha de cierre es requerida");
         ASSERTION.assertion(fechaCierreInscripciones.isAfter(fechaInicioInscripciones),
@@ -116,9 +163,8 @@ public class Torneo {
 
     /**
      * Permite registrar un equipo en el torneo
-     * 
      * @param equipo Equipo a ser registrado
-    * @throws Se genera un error si ya existe un equipo registrado con el mismo
+     * @throws Se genera un error si ya existe un equipo registrado con el mismo
      *            nombre, o en caso de que las inscripciones del torneo no esten
      *            abiertas.
      */
@@ -133,7 +179,8 @@ public class Torneo {
 
     /**
      * Valida que las inscripciones del torneo esten abiertas, en caso de no estarlo
-     * genera un assertion error.
+     * @throws se genera un assertion error si las inscripciones se recliza antes de
+     * las fechas acordada.
      */
     private void validarInscripciopnesAbiertas() {
         boolean inscripcionAbierta = fechaInicioInscripciones.isBefore(LocalDate.now())
@@ -143,7 +190,7 @@ public class Torneo {
 
     /**
      * Valida que no exista ya un equipo registrado con el mismo nombre, en caso de
-     * haberlo genera un assertion error.
+     * @throws se genera un error si validamos el nombre del equipo y no lo encontramos.
      */
     private void validarEquipoExiste(Equipo equipo) {
         boolean existeEquipo = buscarEquipoPorNombre(equipo.nombre()).isPresent();
@@ -202,40 +249,42 @@ public class Torneo {
         ASSERTION.assertion(!LocalDate.now().isAfter(fechaCierreInscripciones),
                 "No se pueden registrar jugadores después del a fecha de cierre de inscripciones");
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        // metodo de comparacin q concuerde el genero
-        ASSERTION.assertion(genero.equals(jugador.getGenero()),
-                "el genero no es permitido, no concuerda el genero del torneo con el de el jugado");
-                //validacion de primer punto de requisitos de proyecto final, validacion vassada en el genro tanto de torneo como de jugadro
+        // assertion que compare el genero del toenro con el del jugador 
+        ASSERTION.assertion(genero.equals(jugador.getGenero()),"el genero no es permitido, no concuerda el genero del torneo con el de el jugado");
+
+/** requerimeinto #1 
+ * validacion de primer punto de requisitos de proyecto final, validacion vasada en el genero tanto de torneo como de jugador
+ * @param genero 
+ */
         switch (genero) {
             case FEMENINO:
                 if (jugador.getGenero().equals(TipoGenero.FEMENINO)) {
-                    equipo.registrarJugador(jugador);
+                    // si el genero del jugador es gual a al genero femenino del torneo
+                    // se ejecutan este metodos de validacion como de registro del jugador 
+                    validarJugadorExiste(jugador);
                     validarLimiteEdadJugador(jugador);
                     equipo.registrarJugador(jugador);
                 }
                 break;
             case MASCULINO:
                 if (jugador.getGenero().equals(TipoGenero.MASCULINO)) {
-                     validarEquipoExiste(equipo);
+                    // si el genero del jugador es gual a al genero masculino del torneo
+                    // se ejecutan este metodos de validacion como de registro del jugador 
+                     validarJugadorExiste(jugador);
                      validarLimiteEdadJugador(jugador);
                     equipo.registrarJugador(jugador);
                 }
                 break;
             default:
-                equipo.registrarJugador(jugador);
+                // si el genero del jugador es gual a al genero es mixto del torneo
+                // se ejecutan este metodos de validacion como de registro del jugador 
+                validarJugadorExiste(jugador);
                 validarLimiteEdadJugador(jugador);
                 equipo.registrarJugador(jugador);
                 break;
         }
-         
-
 }
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    
-
-   
-
-
     /**
      * Permite buscar un jugador basado en su nombre y apellido en todos los equipos
      * registrados en el torneo.
@@ -254,8 +303,9 @@ public class Torneo {
     }
 
     /**
-     * Valida que no exista ya un jugador registrado con el mismo nombre y apellido,
-     * en caso de haberlo genera un assertion error.
+     * Validar que no exista ya un jugador registrado con el mismo nombre y apellido,
+     * @param jugador 
+     * @throws se genera un error si el jugador ya existe.
      */
     private void validarJugadorExiste(Jugador jugador) {
         boolean existeJugador = buscarJugador(jugador).isPresent();
@@ -265,27 +315,14 @@ public class Torneo {
     /**
      * Valida que no exista se puedan registrar jugadores que al momento del inicio
      * del torneo excedan el limite de edad.
+     * @param jugador 
+     * @throws se genera un error si el limite de edad del jugador si excede el limite de edad
      */
     private void validarLimiteEdadJugador(Jugador jugador) {
         var edadAlInicioTorneo = jugador.calcularEdad(fechaInicio);
         ASSERTION.assertion(limiteEdad == 0 || limiteEdad >= edadAlInicioTorneo,
                 "No se pueden registrar jugadores que excedan el limite de edad del torneo");
     }
-
-    public ArrayList<Juez> getListaDeJueces() {
-        return listaDeJueces;
-    }
-
-    public void setListaDeJueces(ArrayList<Juez> listaDeJueces) {
-        this.listaDeJueces = listaDeJueces;
-    }
-
-    public TipoTorneo getTipoTorneo() {
-        return tipoTorneo;
-    }
-
-    //  Requerimiento # 4
-    //me muestra los enfrentamientos de cada equipo, segun su nombre
 
     /**
      * Permite registrar un participante en el torneo
@@ -305,8 +342,8 @@ public class Torneo {
     }
     /**
      * Valida que el participante sea acorde con el carácter del torneo.
-     * 
      * @param participante Participante a ser registrado
+     * @throws se genera un error si las inscripciones no estan abiertas
      */
     private void validarCaracter(Participante participante) {
         ASSERTION.assertion(caracter.esValido(participante), "Las inscripciones no están abiertas");
@@ -325,9 +362,9 @@ public class Torneo {
         Predicate<Participante> condicion = participante -> participante.getNombreCompleto().equals(nombre);
         return participantes.stream().filter(condicion).findAny();
     }
-       /**
+    /**
      * Valida que no exista ya un equipo registrado con el mismo nombre, en caso de
-     * haberlo genera un assertion error.
+     * @throws se genera un erro si ese equipo ya esta registrado haberlo genera un assertion error.
      */
     private void validarParticipanteExiste(Participante participante) {
         boolean existeEquipo = buscarParticipantePorNombre(participante.getNombreCompleto()).isPresent();
@@ -335,42 +372,211 @@ public class Torneo {
     }
 
 //--------------------------------------------------------------------------------------------------------  
-        // Para registrar los jueces a lista 2#
+
+        /**requerimiento #2
+         * este metodo agrega a los jueces despues de ver si existe 
+         * @param juez
+         */
+
+        private void validarjuezExiste(Juez juez) {
+        boolean existejuez = buscarParticipantePorNombre(juez.getApellido()).isPresent();
+        ASSERTION.assertion(!existejuez, "El equipo ya esta registrado");
+
+    }
         public void registrarJuez(Juez juez) {
-            listaDeJueces.add(juez);
+        validarjuezExiste(juez);
+        listaDeJueces.add(juez);
         }
-//---------------------------------------------------------------------------------------------------------
 
-    // requerimiento 4#
-    
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+/**requerimiento #4
+ *El método enfrentamientosEquipo recibe como entrada el nombre de un equipo (nombreEquipo) y devuelve un ArrayList de objetos MatchDay
+  que representan los enfrentamientos en los que el equipo especificado está involucrado.
+ * @param nombreEquipo
+ * @return
+ */
     public ArrayList<MatchDay> enfrentamientosEquipo(String nombreEquipo){
+        //Se inicializa un ArrayList vacío llamado enfrentEquipo para almacenar los enfrentamientos que involucran al equipo especificado.
         ArrayList<MatchDay> enfrentEquipo = new ArrayList<>();
+        //Se itera sobre la lista enfrentamientos, que presumiblemente contiene objetos MatchDay que representan todos los enfrentamientos.
         for(int i = 0;i < enfrentamientos.size();i++){
+        //Para cada enfrentamiento, se obtienen los nombres del equipo local (aux2) y el equipo visitante (aux1)
+        // utilizando los métodos getLocalTeam() y getVisitorTeam(), respectivamente.
             String aux1 = enfrentamientos.get(i).getVisitorTeam().toString();
             String aux2 = enfrentamientos.get(i).getLocalTeam().toString();
+        //Se verifica si aux1 o aux2 coinciden con el nombreEquipo especificado utilizando el método equalsIgnoreCase(), 
+        //que realiza una comparación sin tener en cuenta las mayúsculas y minúsculas.
             if(aux1.equalsIgnoreCase(nombreEquipo) || aux2.equalsIgnoreCase(nombreEquipo)){
+                //Si hay una coincidencia, se agrega el objeto MatchDay actual a la lista enfrentEquipo.
                 enfrentEquipo.add(enfrentamientos.get(i));
             }
 
         }
         return enfrentEquipo;
     }
-//--------------------------------------------------------------------------------------------------------------
-    //Requerimiento # 5 
-    //me muestra los enfrentamientos en los que pitara el juez, segun su licencia
-    //enfrentamientos.get(i).getJuez();
 
-    public ArrayList<MatchDay> enfrentamientosJuez(String licencia){
+//--------------------------------------------------------------------------------------------------------------
+
+    /**requerimiento #5
+     * El método enfrentamientosJuez recibe como entrada una licencia de juez (licencia) y
+     * devuelve un ArrayList de objetos MatchDay que representan los enfrentamientos en los que ese juez está involucrado.
+     * @param licencia
+     * @return refereeMatches
+     */
+    public ArrayList<MatchDay> enfrentamientosJuez(String licencia) {
+        //se inicializa un ArrayList vacío llamado refereeMatches para almacenar los enfrentamientos en los que el juez está involucrado.
         ArrayList<MatchDay> refereeMatches = new ArrayList<>();
-        for(int i = 0 ; i < enfrentamientos.size() ; i++){
-           ArrayList<Juez> refereeAux = enfrentamientos.get(i).getListaDeJueces();
-           for(int j = 0; j < refereeAux.size(); j++){
-                if(refereeAux.get(j).getLicenciaDeJuez().equalsIgnoreCase(licencia)){
-                    refereeMatches.add(enfrentamientos.get(i));
+        //Se itera sobre la lista enfrentamientos, que contiene objetos MatchDay que representan los enfrentamientos.
+        for (MatchDay enfrentamiento : enfrentamientos) {
+            //Para cada enfrentamiento, se obtiene la lista de jueces (refereeAux) utilizando el método getListaDeJueces().
+            ArrayList<Juez> refereeAux = enfrentamiento.getListaDeJueces();
+            //Se itera sobre la lista de jueces (refereeAux) 
+            for (Juez referee : refereeAux) {
+                // se verifica si la licencia del juez actual coincide con 
+               //la licencia especificada utilizando el método getLicenciaDeJuez() y equalsIgnoreCase().
+                if (referee.getLicenciaDeJuez().equalsIgnoreCase(licencia)) {
+                    //se agrega el objeto MatchDay actual a la lista refereeMatches.
+                    refereeMatches.add(enfrentamiento);
                 }
-           }
+            }
         }
+        
         return refereeMatches;
     }
+    /**El método deducirPartido toma una lista de objetos MatchDay llamada enfrentamientos como entrada y devuelve un ArrayList de matrices de cadenas (String[])
+     *  que representan los resultados deducidos de los partidos finalizados.
+     * @param enfrentamientos
+     * @return listaPartidosFinalizados
+     */
+    public ArrayList<String[]> deducirPartido(ArrayList<MatchDay> enfrentamientos) {
+        //Se inicializa un ArrayList vacío llamado listaPartidosFinalizado para almacenar los resultados deducidos de los partidos finalizados.
+        ArrayList<String[]> listaPartidosFinalizado = new ArrayList<>();
+         //Se utiliza el método stream() en la lista enfrentamientos para realizar operaciones en cada objeto MatchDay.
+        enfrentamientos.stream()
+        //Se aplica un filtro utilizando filter() para seleccionar solo los enfrentamientos que tienen un estado de partido igual a FINALIZADO, utilizando el método getEstado().
+            .filter(enfrentamiento -> enfrentamiento.getEstado()== EstadoPartido.FINALIZADO)
+            .forEach(enfrentamiento -> {
+                //Para cada enfrentamiento seleccionado, se obtienen los resultados del marcador del equipo local y visitante utilizando los métodos 
+                //getMarcadorEquipoLocal() y getMarcadorEquipoVisitante() respectivamente.
+                int resultadoLocal = enfrentamiento.getResultadoEnfrentamiento().getMarcadorEquipoLocal();
+                int resultadoVisitante = enfrentamiento.getResultadoEnfrentamiento().getMarcadorEquipoVisitante();
+                //Se crean dos matrices de cadenas (String[]) llamadas auxLocal y auxVisitante para almacenar el nombre del equipo y el resultado deducido.
+                //Se asigna el nombre del equipo local y la cadena "EMPATO" a auxLocal, y se asigna el nombre del equipo visitante y la cadena "EMPATO" a auxVisitante.
+                String[] auxLocal = {enfrentamiento.getLocalTeam().nombre(), "EMPATO"};
+                String[] auxVisitante = {enfrentamiento.getVisitorTeam().nombre(), "EMPATO"};
+                //Se comparan los resultados del marcador para determinar si el equipo local ganó o perdió en comparación con el equipo visitante. 
+                //Si el resultado local es mayor que el resultado visitante, se actualizan las cadenas de resultado en auxLocal y
+                //auxVisitante para reflejar que el equipo local ganó y el equipo visitante perdió. Si el resultado local es menor que el resultado visitante, 
+                //se actualizan las cadenas de resultado para reflejar que el equipo local perdió y el equipo visitante ganó.
+                if (resultadoLocal > resultadoVisitante) {
+                    auxLocal[1] = "GANO";
+                    auxVisitante[1] = "PERDIO";
+                } else if (resultadoLocal < resultadoVisitante) {
+                    auxLocal[1] = "PERDIO";
+                    auxVisitante[1] = "GANO";
+                }
+                //Se agregan las matrices auxLocal y auxVisitante a la lista listaPartidosFinalizado.
+                listaPartidosFinalizado.add(auxLocal);
+                listaPartidosFinalizado.add(auxVisitante);
+            });
+    
+        return listaPartidosFinalizado;
+    }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    /** requisito #6
+     * Este método se encarga de clasificar los equipos en función de sus estadísticas de victorias, derrotas y empates.
+     * 
+     * @return posiciones 
+     */
+    public List<String> clasificarEquipos() {
+    ArrayList<String[]> listaPartidosFinalizado = deducirPartido(enfrentamientos);
+
+    Map<String, EstadisticasEquipo> estadisticasEquipos = new HashMap<>();
+   //un bucle for-each que itera sobre la lista listaPartidosFinalizado, que contiene matrices de cadenas (String[]) 
+   //representando los resultados deducidos de los partidos finalizados.
+    for (String[] resultado : listaPartidosFinalizado) {
+        //Para cada elemento resultado en la lista listaPartidosFinalizado, se extraen dos cadenas de la matriz: nombreEquipo y resultadoPartido.
+        String nombreEquipo = resultado[0];
+        String resultadoPartido = resultado[1];
+        //Se utiliza el nombre del equipo (nombreEquipo) para obtener las estadísticas del equipo correspondiente de un mapa llamado estadisticasEquipos. 
+        //Si no existen estadísticas para ese equipo, se crea un nuevo objeto EstadisticasEquipo utilizando el operador new.
+        EstadisticasEquipo estadisticas = estadisticasEquipos.getOrDefault(nombreEquipo, new EstadisticasEquipo());
+        //Se verifica el valor de resultadoPartido para determinar si el equipo ganó, perdió o empató el partido. 
+        if (resultadoPartido.equals("GANO")) {
+            //Si es "GANO", se incrementa el contador de victorias en las estadísticas del equipo utilizando el método incrementarVictorias()de la clase EstadisticasEquipo.
+            estadisticas.incrementarVictorias();
+        } else if (resultadoPartido.equals("PERDIO")) {
+            //Si es "PERDIO", se incrementa el contador de derrotas.
+            estadisticas.incrementarDerrotas();
+        } else {
+            // Si no es ninguno de los dos, se incrementa el contador de empates.
+            estadisticas.incrementarEmpates();
+        }
+           //El método put() es una operación de mapa que toma dos parámetros: la clave y el valor. En este caso, el nombreEquipo (nombre del equipo) se utiliza como clave, 
+           //y el objeto estadisticas (estadísticas del equipo) se utiliza como valor. Esta operación agrega o actualiza la entrada en el mapa con el par clave-valor especificado.
+        estadisticasEquipos.put(nombreEquipo, estadisticas);
+    }
+    //crea una lista llamada posiciones que contiene las claves (nombres de los equipos) del mapa estadisticasEquipos.
+    List<String> posiciones = new ArrayList<>(estadisticasEquipos.keySet());
+    //se utiliza el método sort() en la lista posiciones para ordenar los nombres de los equipos en función de sus estadísticas. 
+    posiciones.sort((equipo1, equipo2) -> {
+        // se obtienen las estadísticas del equipo 1 y del equipo 2 utilizando los nombres de los equipos (equipo1 y equipo2) como claves en el mapa estadisticasEquipos
+        EstadisticasEquipo estadisticas1 = estadisticasEquipos.get(equipo1);
+        EstadisticasEquipo estadisticas2 = estadisticasEquipos.get(equipo2);
+        //Si el número de victorias es diferente de cero, se devuelve el resultado de la comparación. Esto asegura que los equipos se ordenen en función de sus victorias de mayor a menor.
+        int comparacionVictorias = Integer.compare(estadisticas2.getVictorias(), estadisticas1.getVictorias());
+
+        if (comparacionVictorias != 0) {
+            return comparacionVictorias;
+        }
+        //Esto asegura que, en caso de empate en victorias, los equipos se ordenen en función de sus derrotas de menor a mayor.
+        return Integer.compare(estadisticas1.getDerrotas(), estadisticas2.getDerrotas());
+    });
+
+    return posiciones;
+}
+
+/*El código que has proporcionado define una clase estática llamada EstadisticasEquipo. Esta clase representa las estadísticas de un equipo y tiene los siguientes atributos: victorias, derrotas y empates. 
+ * 
+ */
+private static class EstadisticasEquipo {
+    //atributos
+    private int victorias;
+    private int derrotas;
+    private int empates;
+    // constructor
+    public EstadisticasEquipo() {
+        this.victorias = 0;
+        this.derrotas = 0;
+        this.empates = 0;
+    }
+    // metodos que cambian el estado de las variables (victorias,derrotas,empates)
+    public void incrementarVictorias() {
+        victorias++;
+    }
+
+    public void incrementarDerrotas() {
+        derrotas++;
+    }
+
+    public void incrementarEmpates() {
+        empates++;
+    }
+    // metodos de acceso
+    public int getVictorias() {
+        return victorias;
+    }
+
+    public int getDerrotas() {
+        return derrotas;
+    }
+
+    public int getEmpates() {
+        return empates;
+    }
+}
+    
 }

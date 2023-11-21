@@ -1,12 +1,14 @@
-/**
- * Registro que agrupa los datos de un Equipo
- * @author Área de programación UQ
- * @since 2023-09
 
- * Licencia GNU/GPL V3.0 (https://raw.githubusercontent.com/grid-uq/poo/main/LICENSE) 
- */
 package co.edu.uniquindio.poo.torneodeportivo;
-
+/**
+ * registro que agrupa los datos de un equipo
+ *@author: Samuel Castaño
+ *@author: Daniel Jurado
+ *@author: Salomé Pérez
+ *@since : 22-11-2023
+ * licencia GNU/GLP V3.0 (https://github.com/SalomePerez/PROYECTO-FINAL-P2.git)
+ * esta clase llamada Equipo tiene varios atributos y metodos propios de un equipo y es un aclase de tipo record
+ */
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Optional;
@@ -14,11 +16,12 @@ import java.util.function.Predicate;
 import static co.edu.uniquindio.poo.util.AssertionUtil.ASSERTION;
 
 public record Equipo(String nombre,Persona representante,Collection<Jugador> jugadores) {
+    //constructor
     public Equipo{
         ASSERTION.assertion( nombre != null && !nombre.isBlank() , "El nombre es requerido");
         ASSERTION.assertion( representante != null , "El representante es requerido");
     }
-
+    //cosntructor
     public Equipo(String nombre,Persona representante){
         this(nombre,representante,new LinkedList<>());
     }
@@ -45,7 +48,9 @@ public record Equipo(String nombre,Persona representante,Collection<Jugador> jug
     }
 
     /**
-     * Valida que no exista ya un jugador registrado con el mismo nombre y apellido, en caso de haberlo genera un assertion error.
+     * Valida que no exista ya un jugador registrado con el mismo nombre y apellido
+     * @param jugador
+     * @throws se genra un error en caso de haberlo genera un assertion error.
      */
     private void validarJugadorExiste(Jugador jugador) {
         boolean existeJugador = buscarJugador(jugador).isPresent();

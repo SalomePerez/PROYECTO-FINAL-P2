@@ -1,46 +1,48 @@
 package co.edu.uniquindio.poo.torneodeportivo;
+import static co.edu.uniquindio.poo.util.AssertionUtil.ASSERTION;
 
-
-import java.time.LocalDate;
+/**
+ * requrimiento #3
+ *@author: Samuel Castaño
+ *@author: Daniel Jurado
+ *@author: Salomé Pérez
+ *@since : 22-11-2023
+ * licencia GNU/GLP V3.0 (https://github.com/SalomePerez/PROYECTO-FINAL-P2.git)
+ * esta clase llamada matchDay tiene metodos se encarga de todo lo referente a los encuentros entre los equipo, ajustando su estado 
+ */
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
 
+
 public class MatchDay {
+
+    // atributos
     private LocalDateTime fechaEnfrentamiento;
     private Lugar lugar;
     private Equipo localTeam;
     private Equipo visitorTeam;
     private Marcador resultadoEnfrentamiento;
-    private EstadoPartido estadoPartido;
-    private LocalTime hora;
-    private LocalDate fecha;
+    private EstadoPartido estado= EstadoPartido.PENDIENTE;
+    private LocalDateTime fechahora;
     private ArrayList<Juez> listaDeJueces;
 
+    //cosntructor
     public MatchDay(LocalDateTime fechaEnfrentamiento, Juez juez, Lugar lugar, Equipo localTeam, Equipo visitorTeam, Marcador resultadoEnfrentamiento,
-            EstadoPartido estadoPartido, LocalTime hora, LocalDate fecha, ArrayList<Juez> listaDeJueces) {
+            EstadoPartido estadoPartido, LocalTime hora, LocalDateTime fechahora, ArrayList<Juez> listaDeJueces) {
+         //assetrs
+         ASSERTION.assertion(false);
 
         this.fechaEnfrentamiento = fechaEnfrentamiento;
-    
         this.lugar = lugar;
         this.localTeam = localTeam;
         this.visitorTeam = visitorTeam;
-        this.hora = hora;
-        this.fecha = fecha;
+        
+        this.fechahora = fechahora;
 
-        if(estadoPartido == EstadoPartido.FINALIZADO){
-             this.resultadoEnfrentamiento = resultadoEnfrentamiento;
-        }
-         else if(estadoPartido == EstadoPartido.APLAZADO){
-                System.out.println("se aplaza por el clima :( ");
-        }
-        else{
-            this.resultadoEnfrentamiento = null;
-        }
-        this.listaDeJueces = new ArrayList<>();
     }
-
+    // metodos de acceso
     public LocalDateTime getFechaEnfrentamiento() {
         return fechaEnfrentamiento;
     }
@@ -81,30 +83,12 @@ public class MatchDay {
         this.resultadoEnfrentamiento = resultadoEnfrentamiento;
     }
 
-    public EstadoPartido getEstadoPartido() {
-        return estadoPartido;
+    public LocalDateTime getFechahora() {
+        return fechahora;
     }
-
-    public void setEstadoPartido(EstadoPartido estadoPartido) {
-        this.estadoPartido = estadoPartido;
+    public void setFechahora(LocalDateTime fechahora) {
+        this.fechahora = fechahora;
     }
-
-    public LocalTime getHora() {
-        return hora;
-    }
-
-    public void setHora(LocalTime hora) {
-        this.hora = hora;
-    }
-
-    public LocalDate getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
-
     public ArrayList<Juez> getListaDeJueces() {
         return listaDeJueces;
     }
@@ -112,8 +96,61 @@ public class MatchDay {
     public void setListaDeJueces(ArrayList<Juez> listaDeJueces) {
         this.listaDeJueces = listaDeJueces;
     }
-
     
-
+    public EstadoPartido getEstado() {
+        return estado;
+    }
+    public void setEstado(EstadoPartido estado) {
+        this.estado = estado;
+    }
+//------------------------------------------------------------------------------------------------------------------------------------
+    
+    /** este metodo de solicitarResultado() crea un objeto de la clase Marcador 
+     * @param marcadorEquipoLocal = 6
+     * @param marcadorEquipoVisitante = 2
+     * @return resultado .:. variable que contiene estos 2 resultados 
+     */
+    public Marcador solicitatarResultado() {
+        var resultado = new Marcador((byte)6, (byte)2);
+        return resultado;
+    }
+    /** este metodo  de deducirEstado () inicia con variables boolenas 
+     * @param isSuspendido = false or true (dependiendo de las dediciones (if..))
+     * @param isFinalizado = false or true (dependiendo de las dediciones (if..))
+     * otra variable provisional es :
+     * @param ahora = la fecha con la hora prepsnte con  la que vamos a comparar la fecha y la hora del partido ya planeado
+     * @return estado .:. variable que contien el estado final del enfrentamiento
+     */
+    public EstadoPartido deducirEstado() {
+        //atributo 
+        boolean isSuspendido = false;
+        // condicion de desicion 
+        if (isSuspendido == false) {
+            //atributo
+            boolean isFinalizado = true;
+            //condicion de desicion
+            if (isFinalizado == false) {
+                // atributo de control "ahora"
+                LocalDateTime ahora = LocalDateTime.now();
+                //condicion de desicion 
+                if (ahora.isEqual(fechahora)) {
+                    // resultado desicion 
+                    estado = EstadoPartido.ENJUEGO;
+                } else {
+                    // resultado desicion 
+                    estado = EstadoPartido.PENDIENTE;
+                }
+               //condicion de desicion 
+            } else if (isFinalizado == true) {
+                // resultado desicion
+                estado = EstadoPartido.FINALIZADO;
+            }
+            //condicion desicion 
+        } else if (isSuspendido == true) {
+            //resultado desicion 
+            estado = EstadoPartido.APLAZADO;
+        }
+        return estado;
+    }
     
 }

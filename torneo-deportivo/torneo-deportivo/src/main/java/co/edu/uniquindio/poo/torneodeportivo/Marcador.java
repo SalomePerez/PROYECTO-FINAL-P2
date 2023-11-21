@@ -1,28 +1,38 @@
 package co.edu.uniquindio.poo.torneodeportivo;
-
+/**
+ * registro que agrupa los datos de un equipo
+ *@author: Samuel Castaño
+ *@author: Daniel Jurado
+ *@author: Salomé Pérez
+ *@since : 22-11-2023
+ * licencia GNU/GLP V3.0 (https://github.com/SalomePerez/PROYECTO-FINAL-P2.git)
+ * esta clase llamada Marcador que tiene los marcadores de lso 2 equipos 
+ */
 public class Marcador {
-
-    private byte MarcadorEquipo1;
-    private byte MarcadorEquipo;
-
-    public Marcador(byte marcadorEquipo1, byte marcadorEquipo) {
-        MarcadorEquipo1 = marcadorEquipo1;
-        MarcadorEquipo = marcadorEquipo;
+    //atributos 
+    private byte marcadorEquipoLocal;
+    private byte marcadorEquipoVisitante;
+    // constructor
+    public Marcador(byte marcadorEquipoLocal, byte marcadorEquipoVisitante) {
+        this.marcadorEquipoLocal = marcadorEquipoLocal;
+        this.marcadorEquipoVisitante = marcadorEquipoVisitante;
+    }
+    // metodos de acceso 
+    public byte getMarcadorEquipoLocal() {
+        return marcadorEquipoLocal;
     }
 
-    public byte getMarcadorEquipo1() {
-        return MarcadorEquipo1;
+    public void setMarcadorEquipoLocal(byte marcadorEquipoLocal) {
+        this.marcadorEquipoLocal = marcadorEquipoLocal;
     }
 
-    public void setMarcadorEquipo1(byte marcadorEquipo1) {
-        MarcadorEquipo1 = marcadorEquipo1;
+    public byte getMarcadorEquipoVisitante() {
+        return marcadorEquipoVisitante;
     }
 
-    public byte getMarcadorEquipo() {
-        return MarcadorEquipo;
+    public void setMarcadorEquipoVisitante(byte marcadorEquipoVisitante) {
+        this.marcadorEquipoVisitante = marcadorEquipoVisitante;
     }
-
-    public void setMarcadorEquipo(byte marcadorEquipo) {
-        MarcadorEquipo = marcadorEquipo;
-    }
+    
+  
 }
