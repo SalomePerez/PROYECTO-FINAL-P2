@@ -382,7 +382,6 @@ public Collection<Participante> getParticipantes() {
         private void validarjuezExiste(Juez juez) {
         boolean existejuez = buscarParticipantePorNombre(juez.getApellido()).isPresent();
         ASSERTION.assertion(!existejuez, "El equipo ya esta registrado");
-
     }
         public void registrarJuez(Juez juez) {
         validarjuezExiste(juez);
@@ -445,6 +444,9 @@ public Collection<Participante> getParticipantes() {
         
         return refereeMatches;
     }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     /**El método deducirPartido toma una lista de objetos MatchDay llamada enfrentamientos como entrada y devuelve un ArrayList de matrices de cadenas (String[])
      *  que representan los resultados deducidos de los partidos finalizados.
      * @param enfrentamientos
@@ -485,7 +487,6 @@ public Collection<Participante> getParticipantes() {
         return listaPartidosFinalizado;
     }
 
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     /** requisito #6
      * Este método se encarga de clasificar los equipos en función de sus estadísticas de victorias, derrotas y empates.

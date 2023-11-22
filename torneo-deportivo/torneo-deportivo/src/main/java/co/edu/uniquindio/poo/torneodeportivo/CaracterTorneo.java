@@ -9,6 +9,7 @@ package co.edu.uniquindio.poo.torneodeportivo;
  * esta clase tiene los tipos de torneo en una clase de tipo Enum
  */
 public enum CaracterTorneo {
+    
 /** el caracter torneo, es una clase que contiene que tipo torneo es dependiendo de su disciplina en este ca
  * @param INDIVIDUAL 
  * @param GRUPAL

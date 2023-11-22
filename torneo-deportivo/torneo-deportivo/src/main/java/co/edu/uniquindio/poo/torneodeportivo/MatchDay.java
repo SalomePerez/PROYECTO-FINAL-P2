@@ -1,6 +1,5 @@
 package co.edu.uniquindio.poo.torneodeportivo;
 import static co.edu.uniquindio.poo.util.AssertionUtil.ASSERTION;
-
 /**
  * requrimiento #3
  *@author: Samuel Castaño
@@ -32,7 +31,7 @@ public class MatchDay {
     public MatchDay(LocalDateTime fechaEnfrentamiento, Juez juez, Lugar lugar, Equipo localTeam, Equipo visitorTeam, Marcador resultadoEnfrentamiento,
             EstadoPartido estadoPartido, LocalTime hora, LocalDateTime fechahora, ArrayList<Juez> listaDeJueces) {
          //assetrs
-         ASSERTION.assertion(false);
+        ASSERTION.assertion(fechaEnfrentamiento!= null, "La fecha de inicio es requerida");
 
         this.fechaEnfrentamiento = fechaEnfrentamiento;
         this.lugar = lugar;
