@@ -42,7 +42,7 @@ public class TorneoTest {
 
         listJueces.add(jues);
         
-        Torneo torneo = new Torneo("Copa Mundo", LocalDate.of(2023, 10, 1), LocalDate.of(2023, 8, 1), LocalDate.of(2023, 9, 15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL,null,null, TipoGeneroTorneo.FEMENINO, null, null, null);
+        Torneo torneo = new Torneo("Copa Mundo", LocalDate.of(2023, 10, 1), LocalDate.of(2023, 8, 1), LocalDate.of(2023, 9, 15), (byte)24, (byte)0, 0,TipoTorneo.LOCAL,null,equipo, TipoGeneroTorneo.FEMENINO, null, null, null);
 
         // Recuperación y verificación de datos
         assertEquals("Copa Mundo",torneo.getNombre());

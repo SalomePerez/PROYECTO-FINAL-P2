@@ -23,4 +23,5 @@ public class juezTest {
     assertEquals("joescqgmail.com",juez.getEmail());
     assertEquals("321586974",juez.getCelular());
    }
+   
 }

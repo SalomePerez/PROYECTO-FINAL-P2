@@ -42,7 +42,7 @@ public class Torneo {
     //constuctor
     public Torneo(String nombre, LocalDate fechaInicio, LocalDate fechaInicioInscripciones,
             LocalDate fechaCierreInscripciones, byte numeroParticipantes, byte limiteEdad, int valorInscripcion,
-            TipoTorneo tipoTorneo, Collection<Participante> participantes, Collection<Equipo> equipos, TipoGeneroTorneo genero, ArrayList<Juez> listaDeJueces,CaracterTorneo caracter, Marcador marcador) {
+            TipoTorneo tipoTorneo, Equipo equipo, TipoGeneroTorneo genero, ArrayList<Juez> listaDeJueces,CaracterTorneo caracter, Marcador marcador) {
 
             // assertion de los atributos propios de esta clase que exige que no sean null
             ASSERTION.assertion(nombre != null && !nombre.isBlank(), "El nombre es requerido");
@@ -69,6 +69,7 @@ public class Torneo {
 
     }
    
+
     // metodos de acceso
     public String getNombre() {
         return nombre;
@@ -576,9 +577,7 @@ private static class EstadisticasEquipo {
         return derrotas;
     }
 
-    public int getEmpates() {
-        return empates;
-    }
+
 }
     
 }
